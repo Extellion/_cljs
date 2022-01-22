@@ -6,8 +6,15 @@
 ;; -------------------------
 ;; Views
 
+(def todos (r/atom
+            [{:description "First item" :completed false}]))
+
 (defn home-page []
-  [:div [:h2 "Welcome to Reagent"]])
+  [:div
+    [:h2 "Todo App"]
+    [:ul
+      (for [todo @todos]
+        [:li (:description todo)])]])
 
 ;; -------------------------
 ;; Initialize app
