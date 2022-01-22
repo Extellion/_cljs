@@ -10,11 +10,22 @@
             [{:description "First item" :completed false}]))
 
 (defn home-page []
+  (let [value (r/atom "")]
+  (fn []
   [:div
     [:h2 "Todo App"]
+    [:form {:on-submit (fn [e]
+                        (.preventDefault e)
+                        (swap! todos conj {:completed false :description @value})
+                        (reset! value ""))}
+      [:input {:type "text"
+             :value @value
+             :placeholder "Add new item"
+             :on-change (fn [e]
+                          (reset! value (.-value (.-target e))))}]
     [:ul
       (for [todo @todos]
-        [:li (:description todo)])]])
+        ^{:key todo}[:li (:description todo)])]]])))
 
 ;; -------------------------
 ;; Initialize app
