@@ -31,7 +31,7 @@
                           (reset! value (.-value (.-target e))))}]
     [:ul
       (for [todo @todos]
-        ^{:key todo}[:li (:description todo)])]]])))
+        ^{:key todo}[:li {:style {:color (if (:completed todo) "green" "red")}}(:description todo)])]]])))
 
 ;; -------------------------
 ;; Initialize app
